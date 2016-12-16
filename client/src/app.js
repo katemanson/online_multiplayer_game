@@ -1,6 +1,6 @@
 var MapWrapper = require('./mapWrapper.js');
 var countries = require('../../data/countries.js');
-// var Marker = require('./marker.js');
+var Marker = require('./marker.js');
 
 window.onload = function() {
 
@@ -13,15 +13,14 @@ window.onload = function() {
   // var markerOptions = {
   //   position: {lat: 0, lng: 0},
   //   googleMap: mapWrapper.googleMap,
-  //   color: "FF0000",
-  //   label: "GB"
+  //   color: "FF0ff0",
+  //   label: "United Kingdom",
+  //   returnValue: "GB",
+  //   parentWrapper: mapWrapper
   // };
   // console.log(markerOptions);
   // var testMarker = new Marker(markerOptions);
 
-  var test = google.maps.Marker({
-    position: {lat: 0, lng: 0},
-    map: mapWrapper.googleMap
-    // icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + "FF0000")
-  });
+
+
 };
