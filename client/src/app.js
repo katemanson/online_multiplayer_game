@@ -1,5 +1,5 @@
-
 var MapWrapper = require('./mapWrapper.js');
+var countries = require('../../data/countries.js')
 
 window.onload = function () {
 
@@ -7,7 +7,7 @@ window.onload = function () {
   var mapOptions = {container: worldMapDiv, center: {lat: 51.5, lng: -0.127758}, zoom: 3};
   var mapWrapper = new MapWrapper(mapOptions);
 
-  mapWrapper.addMarker('ff0000', {lat: 0, lng: 0});
+  mapWrapper.addAllMarkers(countries);
 
 
 
