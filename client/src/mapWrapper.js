@@ -40,10 +40,11 @@ MapWrapper.prototype = {
         label: markerData.label,
         returnValue: markerData.returnValue,
         parentWrapper: this
+      };
       var tempMarker = new Marker(markerOptions);
       this.addMarker(tempMarker);
-      };
-    };
+
+    });
   }
 
 
