@@ -4,12 +4,14 @@ var path = require('path');
 var countries = require('./data/countries.js');
 
 
-app.get('/', function (req, res) {
+app.get('/', function (req, res){
   console.log(countries[249].name);
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-
+app.get('/markers', function(req, res){
+  res.json(countries);
+});
 
 app.use(express.static('client/build'));
 

@@ -4,7 +4,6 @@ var MapWrapper = function(options){
     zoom: options.zoom}
   );
   this.markers = [];
-
 };
 
 MapWrapper.prototype = {
@@ -18,14 +17,15 @@ MapWrapper.prototype = {
   },
 
   getMarkersData: function(){
-    var url = "http://localhost:3000/markers"
+    var url = "http://localhost:3000/markers";
     var request = new XMLHttpRequest();
     request.open("GET", url);
     request.onload = function () {
         if (request.status === 200) {
             var jsonString = request.responseText;
             var markersData = JSON.parse(jsonString);
-            this.populateMarkers(markersData);
+            console.log(markersData);
+            // this.populateMarkers(markersData);
         };
     };
     request.send();
@@ -43,7 +43,6 @@ MapWrapper.prototype = {
       };
       var tempMarker = new Marker(markerOptions);
       this.addMarker(tempMarker);
-
     });
   }
 

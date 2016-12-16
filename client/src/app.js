@@ -7,6 +7,7 @@ window.onload = function() {
   var worldMapDiv = document.getElementById('world-map');
   var mapOptions = {container: worldMapDiv, center: {lat: 51.5, lng: -0.127758}, zoom: 3};
   var mapWrapper = new MapWrapper(mapOptions);
+  mapWrapper.getMarkersData();
 
   // mapWrapper.addAllMarkers(countries);
 
@@ -20,7 +21,5 @@ window.onload = function() {
   // };
   // console.log(markerOptions);
   // var testMarker = new Marker(markerOptions);
-
-
 
 };

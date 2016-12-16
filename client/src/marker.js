@@ -31,5 +31,4 @@ Marker.prototype = {
 
 };
 
-
 module.exports = Marker;
