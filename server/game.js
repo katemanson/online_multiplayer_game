@@ -1,6 +1,6 @@
 var Game = function(options){
   this.players = [];
-}
+};
 
 Game.prototype = {
 
@@ -8,6 +8,6 @@ Game.prototype = {
     this.players.push(player);
 
   }
-}
+};
 
 module.exports = Game;
