@@ -23,10 +23,9 @@ Marker.prototype = {
   },
 
   markerClicked: function(){
-    console.log(this);
     return function(){
       this.parentWrapper.handleMarkerClick(this.returnValue);
-    };
+    }.bind(this);
   },
 
 };
