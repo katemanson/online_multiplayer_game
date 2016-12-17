@@ -11,15 +11,15 @@ window.onload = function() {
 
   // mapWrapper.addAllMarkers(countries);
 
-  // var markerOptions = {
-  //   position: {lat: 0, lng: 0},
-  //   googleMap: mapWrapper.googleMap,
-  //   color: "FF0ff0",
-  //   label: "United Kingdom",
-  //   returnValue: "GB",
-  //   parentWrapper: mapWrapper
-  // };
-  // console.log(markerOptions);
-  // var testMarker = new Marker(markerOptions);
+  var markerOptions = {
+    position: {lat: 0, lng: 0},
+    googleMap: mapWrapper.googleMap,
+    color: "FF0ff0",
+    label: "United Kingdom",
+    returnValue: "GB",
+    parentWrapper: mapWrapper
+  };
+  console.log(markerOptions);
+  var testMarker = new Marker(markerOptions);
 
 };

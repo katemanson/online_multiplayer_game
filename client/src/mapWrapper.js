@@ -1,7 +1,67 @@
 var MapWrapper = function(options){
   this.googleMap = new google.maps.Map(options.container, {
     center: options.center,
-    zoom: options.zoom}
+    zoom: options.zoom,
+   styles: [
+     {
+       'featureType': 'administrative',
+       'elementType': 'geometry.fill',
+       'stylers': [
+         {'visibility': 'off'}
+       ]
+     },
+     {
+       'featureType': 'administrative.land_parcel',
+       'stylers': [
+         {'visibility': 'off'}
+       ]
+     },
+     {
+       'featureType': 'administrative.locality',
+       'stylers': [
+         {'visibility': 'off'}
+       ]
+     },
+     {
+       'featureType': 'administrative.neighborhood',
+       'stylers': [
+         {'visibility': 'off'}
+       ]
+     },
+     {
+       'featureType': 'administrative.province',
+       'stylers': [
+         {'visibility': 'off'}
+       ]
+     },
+     {
+       'featureType': 'poi',
+       'stylers': [
+         {'visibility': 'off'}
+       ]
+     },
+     {
+       'featureType': 'road',
+       'stylers': [
+         {'visibility': 'off'}
+       ]
+     },
+     {
+       'featureType': 'transit',
+       'stylers': [
+         {'visibility': 'off'}
+       ]
+     },
+     {
+       'featureType': 'water',
+       'elementType': 'labels',
+       'stylers':
+       [
+         {'visibility': 'off'}
+       ]
+     }
+   ]
+  }
   );
   this.markers = [];
 };
@@ -9,7 +69,7 @@ var MapWrapper = function(options){
 MapWrapper.prototype = {
   //
   addMarker: function(marker){
-    this.markers.push(maker);
+    this.markers.push(marker);
   },
 
   handleMarkerClick: function(returnValue){
