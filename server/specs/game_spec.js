@@ -21,5 +21,9 @@ describe ('Game', function(){
     assert.deepEqual(testPlayer, testGame.players[0]);
   });
 
+  it('should be possible to save player to database', function(){
+
+  });
+
 
 });

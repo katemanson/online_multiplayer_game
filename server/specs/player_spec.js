@@ -4,13 +4,8 @@ var assert = require('assert');
 describe ('Player', function(){
 
   var testPlayer = new Player({
-    id: 1,
     name: "Andrina",
     colour: "#0000ff"
-  });
-
-  it('should have an id', function(){
-    assert.equal(1, testPlayer.id);
   });
 
   it('should have a name', function(){

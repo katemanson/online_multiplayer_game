@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./server/specs",
     "start": "nodemon ./server/routes.js"
   },
   "repository": {
@@ -20,6 +20,7 @@
     "express": "^4.14.0"
   },
   "devDependencies": {
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "webpack": "^1.14.0"
   },
