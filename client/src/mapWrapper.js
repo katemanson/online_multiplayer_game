@@ -86,7 +86,7 @@ MapWrapper.prototype = {
             var markersData = JSON.parse(jsonString);
             console.log(markersData);
             // this.populateMarkers(markersData);
-        };
+        }
     };
     request.send();
   },
@@ -107,6 +107,6 @@ MapWrapper.prototype = {
   }
 
 
-}
+};
 
 module.exports = MapWrapper;
