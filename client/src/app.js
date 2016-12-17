@@ -7,6 +7,7 @@ window.onload = function() {
   var worldMapDiv = document.getElementById('world-map');
   var mapOptions = {container: worldMapDiv, center: {lat: 51.5, lng: -0.127758}, zoom: 3};
   var mapWrapper = new MapWrapper(mapOptions);
+  checkForPlayer();
 
   mapWrapper.getMarkersData();
 
@@ -22,3 +23,13 @@ window.onload = function() {
   var testMarker = new Marker(markerOptions);
 
 };
+
+var checkForPlayer = function(){
+  var playerId = localStorage.getItem('playerId');
+  if (playerId){
+    return; // <--so nothing happens, currently; alternatively, do we want the id at this point?
+  }
+  else {
+    document.getElementById('player-popup').style.display = "block"; 
+  }
+}

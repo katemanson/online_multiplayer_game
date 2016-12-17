@@ -1,7 +1,11 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: true}));
+var MongoClient = require('mongodb').MongoClient;
+var Game = require('./game');
 
 app.get('/', function (req, res){
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
@@ -12,6 +16,21 @@ app.get('/markers', function(req, res){
 });
 
 app.use(express.static(__dirname + '/../client/build'));
+
+//CREATE
+app.post('/player', function(req,res) {
+  console.log('body', req.body);
+  // var url = 'mongodb://localhost:27017/game';
+  //PLAYER NAME FROM req.body.playerName (I THINK)
+  //ASSIGN A COLOUR NOT ALREADY ASSIGNED
+  // MongoClient.connect(url, function(err, db) {
+  //   var players = db.collection('players');
+  //   players.insert(); <--INSERT NEW PLAYER OBJECT WITH NAME AND COLOUR
+  //GET BACK playerId FROM MONGO AND SAVE TO LOCAL STORAGE
+  //   res.status(200).end();
+  //   db.close();
+  // });
+});
 
 var server = app.listen(3000, function () {
   var host = server.address().address;

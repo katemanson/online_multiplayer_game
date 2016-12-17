@@ -20,7 +20,7 @@ form {
   top: 50%;
   left: 50%;
   position: absolute;
-  display: block;
+  display: none;
   margin-top: -150px;
   margin-left: -150px;
 }
