@@ -1,5 +1,6 @@
 var MapWrapper = require('./mapWrapper.js');
 var Marker = require('./marker.js');
+var PlayerSetUp = require('./playerSetUp.js');
 
 window.onload = function() {
 
