@@ -1,5 +1,4 @@
 var MapWrapper = require('./mapWrapper.js');
-var countries = require('../../data/countries.js');
 var Marker = require('./marker.js');
 
 window.onload = function() {
@@ -9,8 +8,6 @@ window.onload = function() {
   var mapWrapper = new MapWrapper(mapOptions);
 
   mapWrapper.getMarkersData();
-
-  // mapWrapper.addAllMarkers(countries);
 
   var markerOptions = {
     position: {lat: 0, lng: 0},
