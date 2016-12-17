@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var countries = require('./data/countries.js');
 
 
 app.get('/', function (req, res){
@@ -9,7 +8,7 @@ app.get('/', function (req, res){
 });
 
 app.get('/markers', function(req, res){
-  res.json(countries);
+  //output markers here
 });
 
 app.use(express.static(__dirname + '/../client/build'));
