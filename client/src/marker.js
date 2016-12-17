@@ -23,10 +23,10 @@ Marker.prototype = {
   },
 
   markerClicked: function(){
-    console.log("onlick setup");
+    console.log(this);
     return function(){
       this.parentWrapper.handleMarkerClick(this.returnValue);
-    }.bind(this);
+    };
   },
 
 };
