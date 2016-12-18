@@ -9,14 +9,4 @@ window.onload = function() {
 
   mapWrapper.getMarkersData();
 
-  var markerOptions = {
-    position: {lat: 0, lng: 0},
-    googleMap: mapWrapper.googleMap,
-    color: "FF0ff0",
-    label: "United Kingdom",
-    returnValue: "GB",
-    parentWrapper: mapWrapper
-  };
-  var testMarker = new Marker(markerOptions);
-
 };
