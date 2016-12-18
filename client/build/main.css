@@ -4,7 +4,7 @@ body, html {
 }
 
 form {
-  height: 200px;
+  height: 300px;
   width: 300px;
   border: 2px solid gray;
   border-radius: 10px;
@@ -25,7 +25,18 @@ form {
   margin-left: -150px;
 }
 
-#text-input {
+#name-input {
+  width: 95%;
+  height: 30px;
+  font-size: 20px;
+  font-family: Verdana, Geneva, sans-serif;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+#answer-input {
   width: 95%;
   height: 30px;
   font-size: 20px;

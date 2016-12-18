@@ -7,7 +7,8 @@ window.onload = function() {
   var worldMapDiv = document.getElementById('world-map');
   var mapOptions = {container: worldMapDiv, center: {lat: 51.5, lng: -0.127758}, zoom: 3};
   var mapWrapper = new MapWrapper(mapOptions);
-  checkForPlayer();
+  // checkForPlayer();
+  formPopUp();
 
   mapWrapper.getMarkersData();
 
@@ -24,12 +25,23 @@ window.onload = function() {
 
 };
 
-var checkForPlayer = function(){
+// var checkForPlayer = function(){
+//   var playerId = localStorage.getItem('playerId');
+//   if (playerId){
+//     return; // <--so nothing happens, currently; alternatively, do we want the id at this point?
+//   }
+//   else {
+//     document.getElementById('player-popup').style.display = "block"; 
+//   }
+// };
+
+var formPopUp = function(){
   var playerId = localStorage.getItem('playerId');
-  if (playerId){
-    return; // <--so nothing happens, currently; alternatively, do we want the id at this point?
+  if (playerId) {
+    document.getElementById('player-popup').style.display = "block";
+    document.getElementById('username-div').style.display = "none";
+    return;
+  } else {
+    document.getElementById('player-popup').style.display = "block";
   }
-  else {
-    document.getElementById('player-popup').style.display = "block"; 
-  }
-}
+};

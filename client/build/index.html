@@ -10,10 +10,15 @@
   </head>
   <body>
     <div id="world-map"></div>
+
     <div id="player-popup">
       <form id="player-form" action="/players" method="post">
-        Enter a username:<br>
-        <input id="text-input" type="text" name="playerName"><br>
+      <div id="username-div">
+        Enter a username:
+        <input id="name-input" type="text" name="playerName"><br></div>
+      <div id="answer-div">  
+        What's your guess?
+        <input id="answer-input" type="text" name="answer"></div>
         <input id="submit" type="submit" value="Submit">
       </form>
     </div>
