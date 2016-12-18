@@ -15,10 +15,15 @@ fs.readFile('./countryData.json', function(err, data) {
     if (err) {
       throw err;
     };
-    var collection = db.collection('data');
-    fileDataObject.forEach(function(countryObject){
-      collection.insert(countryObject);
+    db.dropDatabase(function(err){
+      if (err) {
+        throw err;
+      };
+      var collection = db.collection('data');
+      fileDataObject.forEach(function(countryObject){
+        collection.insert(countryObject);
+      });
+      db.close();
     });
-    db.close();
   });
 });
