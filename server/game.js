@@ -40,14 +40,14 @@ Game.prototype = {
     this.getPlayersFromDb();
   },
 
-  runDbQuery: function(projection, runMeWhenDone){
+  runDbQuery: function(projection, runMeWhenDone, database, dbCollection){
 
-    var url = 'mongodb://localhost:27017/game';
+    var url = 'mongodb://localhost:27017/' + database;
     MongoClient.connect(url, function(err, db){
       if(err){
         throw err;
       };
-      var collection = db.collection('gameStates');
+      var collection = db.collection(dbCollection);
       collection.find({}, projection).toArray(function(err, docs){
 
         runMeWhenDone(docs);
@@ -58,15 +58,20 @@ Game.prototype = {
 
   },
 
-  requestClientMarkersFromDb: function(res){
+  sendClientSafeMarkersFromDb: function(res){
     var markersForClient = this.runDbQuery({
       _id: 0,
-      alpha2Code: 1,
+      position: 1,
+      returnValue: 1,
       playerId: 1,
-      markerLabel: 1,
-      markerColor: 1
+      label: 1,
+      color: 1
     },
-    function(docs){res.json(docs)}
+    function(docs){
+      res.json(docs)
+    }, 
+    'game',
+    'gameStates'
   );
   }
 

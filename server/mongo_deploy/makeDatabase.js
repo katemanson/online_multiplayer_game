@@ -42,10 +42,11 @@ fs.readFile('./countryData.json', function(err, data) {
 
       fileDataObject.forEach(function(countryObject){
         var countryState = {
-          alpha2Code: countryObject.alpha2Code,
+          position: {lat: countryObject.latlng[0], lng: countryObject.latlng[1]},
+          returnValue: countryObject.alpha2Code,
           playerId: "",
-          markerLabel: "Unconquered",
-          markerColor: "ffffff",
+          label: "Unconquered",
+          color: "ffffff",
           bestGuess: -1
         };
         gameState.push(countryState);

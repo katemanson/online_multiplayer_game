@@ -12,8 +12,7 @@ app.get('/', function (req, res){
 
 
 app.get('/markers', function(req, res){
-  game.requestClientMarkersFromDb(res);
-  console.log("back in routes");
+  game.sendClientSafeMarkersFromDb(res);
 });
 
 
