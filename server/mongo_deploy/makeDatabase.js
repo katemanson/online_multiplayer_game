@@ -26,4 +26,32 @@ fs.readFile('./countryData.json', function(err, data) {
       db.close();
     });
   });
+
+  var gameUrl = 'mongodb://localhost:27017/game';
+  MongoClient.connect(gameUrl, function(err, db){
+    if (err) {
+      throw err;
+    };
+    db.dropDatabase(function(err){
+      if (err) {
+        throw err;
+      };
+      var gameStates = db.collection('gameStates');
+      //for each country, a country alpha2Code, player name), marker colour, best guess
+      var gameState = [];
+
+      fileDataObject.forEach(function(countryObject){
+        var countryState = {
+          alpha2Code: countryObject.alpha2Code,
+          playerId: "",
+          markerLabel: "Unconquered",
+          markerColor: "ffffff",
+          bestGuess: -1
+        };
+        gameState.push(countryState);
+      });
+      gameStates.insert(gameState);
+      db.close();
+    });
+  })
 });
