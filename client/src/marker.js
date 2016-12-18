@@ -1,17 +1,16 @@
-// options: position, googleMap, color, returnValue, label
 var Marker = function(options){
-  this.returnValue =  options.returnValue;
+  this.returnValue =  options.alpha2Code;
+  this.parentWrapper = options.parentWrapper;
   this.initialize(options);
   this.googleMapMarker.addListener('click', this.markerClicked());
   this.googleMapMarker.addListener('mouseover', this.openInfoWindow());
   this.googleMapMarker.addListener('mouseout', this.closeInfoWindow());
-  this.parentWrapper = options.parentWrapper;
 };
 
 Marker.prototype = {
   initialize: function(options){
 
-    this.googleMap = options.googleMap;
+    // this.googleMap = options.googleMap;
     this.googleMapMarker = new google.maps.Marker({
       position: options.position,
       map: options.googleMap,

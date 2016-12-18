@@ -96,12 +96,12 @@ MapWrapper.prototype = {
   populateMarkers: function(markersData){
     markersData.forEach( function(markerData){
       var markerOptions = {
-        position: markerData.position,
+        returnValue: markerData.alpha2Code,
+        parentWrapper: this,
         googleMap: this.googleMap,
+        position: markerData.position,
         color: markerData.color,
-        label: markerData.label,
-        returnValue: markerData.returnValue,
-        parentWrapper: this
+        label: markerData.label
       };
       var marker = new Marker(markerOptions);
       this.addMarker(marker);

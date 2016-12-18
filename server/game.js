@@ -62,7 +62,7 @@ Game.prototype = {
     var markersForClient = this.runDbQuery({
       _id: 0,
       position: 1,
-      returnValue: 1,
+      alpha2Code: 1,
       playerId: 1,
       label: 1,
       color: 1

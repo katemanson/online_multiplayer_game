@@ -37,15 +37,14 @@ fs.readFile('./countryData.json', function(err, data) {
         throw err;
       };
       var gameStates = db.collection('gameStates');
-      //for each country, a country alpha2Code, player name), marker colour, best guess
       var gameState = [];
 
       fileDataObject.forEach(function(countryObject){
         var countryState = {
           position: {lat: countryObject.latlng[0], lng: countryObject.latlng[1]},
-          returnValue: countryObject.alpha2Code,
+          alpha2Code: countryObject.alpha2Code,
           playerId: "",
-          label: "Unconquered",
+          label: "<p><b>" + countryObject.name + "</b></p><p>" + "Unconquered</p>",
           color: "ffffff",
           bestGuess: -1
         };
