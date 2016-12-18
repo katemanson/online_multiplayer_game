@@ -5,21 +5,17 @@ var PlayerSetup = require('./playerSetup.js');
 window.onload = function() {
 
   var worldMapDiv = document.getElementById('world-map');
-  var mapOptions = {container: worldMapDiv, center: {lat: 51.5, lng: -0.127758}, zoom: 3};
+  var mapOptions = {container: worldMapDiv, center: {lat: 30, lng: 0}, zoom: 2};
   var mapWrapper = new MapWrapper(mapOptions);
-  formPopUp();
 
-  mapWrapper.getMarkersData();
+  mapWrapper.getMarkers();
 
 };
 
 var formPopUp = function(){
   var playerId = localStorage.getItem('playerId');
+  document.getElementById('answer-box').style.display = "block";
   if (playerId) {
-    document.getElementById('player-popup').style.display = "block";
     document.getElementById('username-div').style.display = "none";
-    return;
-  } else {
-    document.getElementById('player-popup').style.display = "block";
-  }
+  } 
 };

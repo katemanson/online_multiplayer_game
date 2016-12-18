@@ -1,10 +1,10 @@
 var Marker = function(options){
-  this.returnValue =  options.alpha2Code;
-  this.parentWrapper = options.parentWrapper;
+  this.returnValue =  options.returnValue;
   this.initialize(options);
   this.googleMapMarker.addListener('click', this.markerClicked());
   this.googleMapMarker.addListener('mouseover', this.openInfoWindow());
   this.googleMapMarker.addListener('mouseout', this.closeInfoWindow());
+  this.parentWrapper = options.parentWrapper;
 };
 
 Marker.prototype = {

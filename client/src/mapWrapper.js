@@ -4,7 +4,7 @@ var MapWrapper = function(options){
   this.googleMap = new google.maps.Map(options.container, {
     center: options.center,
     zoom: options.zoom,
-   styles: [
+    styles: [
      {
        'featureType': 'administrative',
        'elementType': 'geometry.fill',
@@ -76,16 +76,19 @@ var MapWrapper = function(options){
 };
 
 MapWrapper.prototype = {
-  //
   addMarker: function(marker){
     this.markers.push(marker);
   },
 
   handleMarkerClick: function(returnValue){
-    console.log(returnValue);
+    var playerId = localStorage.getItem('playerId');
+    document.getElementById('answer-box').style.display = "block";
+    if (playerId) {
+      document.getElementById('username-div').style.display = "none";      
+    }
   },
 
-  getMarkersData: function(){
+  getMarkers: function(){
     var url = "http://localhost:3000/markers";
     var request = new XMLHttpRequest();
     request.open("GET", url);
@@ -93,7 +96,6 @@ MapWrapper.prototype = {
         if (request.status === 200) {
             var jsonString = request.responseText;
             var markersData = JSON.parse(jsonString);
-            console.log("markersData", markersData);
             this.populateMarkers(markersData);
         }
     }.bind(this);
