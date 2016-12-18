@@ -12,10 +12,3 @@ window.onload = function() {
 
 };
 
-var formPopUp = function(){
-  var playerId = localStorage.getItem('playerId');
-  document.getElementById('answer-box').style.display = "block";
-  if (playerId) {
-    document.getElementById('username-div').style.display = "none";
-  } 
-};
