@@ -13,6 +13,13 @@ var MapWrapper = function(options){
        ]
      },
      {
+      'featureType': 'administrative.country',
+      'elementType': 'labels',
+      'stylers': [
+        {'visibility': 'off'}
+      ]
+     },
+     {
        'featureType': 'administrative.land_parcel',
        'stylers': [
          {'visibility': 'off'}
