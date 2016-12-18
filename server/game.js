@@ -33,10 +33,10 @@ Game.prototype = {
       var collection = db.collection('players');
       collection.find().toArray(function(err, docs){
         this.players = docs;
-        console.log(this.players)
+        console.log(this.players);
+        db.close();
       }.bind(this));
-      db.close();
-      ;
+
     }.bind(this))
   }
 };
