@@ -17,7 +17,6 @@ window.onload = function() {
     returnValue: "GB",
     parentWrapper: mapWrapper
   };
-  console.log(markerOptions);
   var testMarker = new Marker(markerOptions);
 
 };
