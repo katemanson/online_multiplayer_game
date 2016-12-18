@@ -1,3 +1,5 @@
+var Marker = require('./marker.js');
+
 var MapWrapper = function(options){
   this.googleMap = new google.maps.Map(options.container, {
     center: options.center,
@@ -84,10 +86,10 @@ MapWrapper.prototype = {
         if (request.status === 200) {
             var jsonString = request.responseText;
             var markersData = JSON.parse(jsonString);
-            console.log(markersData);
-            // this.populateMarkers(markersData);
+            console.log("markersData", markersData);
+            this.populateMarkers(markersData);
         }
-    };
+    }.bind(this);
     request.send();
   },
 
@@ -101,9 +103,9 @@ MapWrapper.prototype = {
         returnValue: markerData.returnValue,
         parentWrapper: this
       };
-      var tempMarker = new Marker(markerOptions);
-      this.addMarker(tempMarker);
-    });
+      var marker = new Marker(markerOptions);
+      this.addMarker(marker);
+    }.bind(this));
   }
 
 

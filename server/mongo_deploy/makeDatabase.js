@@ -15,10 +15,44 @@ fs.readFile('./countryData.json', function(err, data) {
     if (err) {
       throw err;
     };
-    var collection = db.collection('data');
-    fileDataObject.forEach(function(countryObject){
-      collection.insert(countryObject);
+    db.dropDatabase(function(err){
+      if (err) {
+        throw err;
+      };
+      var collection = db.collection('data');
+      fileDataObject.forEach(function(countryObject){
+        collection.insert(countryObject);
+      });
+      db.close();
     });
-    db.close();
   });
+
+  var gameUrl = 'mongodb://localhost:27017/game';
+  MongoClient.connect(gameUrl, function(err, db){
+    if (err) {
+      throw err;
+    };
+    db.dropDatabase(function(err){
+      if (err) {
+        throw err;
+      };
+      var gameStates = db.collection('gameStates');
+      //for each country, a country alpha2Code, player name), marker colour, best guess
+      var gameState = [];
+
+      fileDataObject.forEach(function(countryObject){
+        var countryState = {
+          position: {lat: countryObject.latlng[0], lng: countryObject.latlng[1]},
+          returnValue: countryObject.alpha2Code,
+          playerId: "",
+          label: "Unconquered",
+          color: "ffffff",
+          bestGuess: -1
+        };
+        gameState.push(countryState);
+      });
+      gameStates.insert(gameState);
+      db.close();
+    });
+  })
 });

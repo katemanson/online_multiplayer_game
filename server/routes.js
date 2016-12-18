@@ -1,19 +1,19 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var bodyParser = require('body-parser');
-app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: true}));
-var MongoClient = require('mongodb').MongoClient;
-var Game = require('./game');
+var Game = require('./game.js');
+
+var game = new Game();
 
 app.get('/', function (req, res){
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
+
 app.get('/markers', function(req, res){
-  //output markers here
+  game.sendClientSafeMarkersFromDb(res);
 });
+
 
 app.use(express.static(__dirname + '/../client/build'));
 
@@ -35,6 +35,7 @@ app.post('/player', function(req,res) {
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
-
   console.log('Ready to take over the world...', host, port);
+
+
 });
