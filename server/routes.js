@@ -12,7 +12,8 @@ app.get('/', function (req, res){
 
 
 app.get('/markers', function(req, res){
-  game.getGameStateFromDb();
+  game.requestClientMarkersFromDb(res);
+  console.log("back in routes");
 });
 
 
