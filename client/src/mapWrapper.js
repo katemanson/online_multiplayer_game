@@ -128,21 +128,24 @@ MapWrapper.prototype = {
   handleAnswer: function(){
     return function(event){
       event.preventDefault();
+      var answerBox = document.getElementById('answer-box');
+      answerBox.style.display = "none";
       var playerGuess = {
         playerId: window.localStorage.getItem('playerId'),
         playerName: event.target["0"].value,
         population: event.target["1"].value,
         alpha2Code: event.target["2"].value
-      }
+      };
 
       var request = new XMLHttpRequest();
-      var url = "http://localhost:3000/game"
+      var url = "http://localhost:3000/game";
       request.open("POST", url);
       request.setRequestHeader("Content-Type", "application/json");
       request.onload = function() {
         if(request.status === 200) {
           var responseObject = JSON.parse(request.responseText);
           this.populateMarkers(responseObject.markersData);
+          window.localStorage.setItem('playerId', responseObject.clientPlayerId);
         }
       }.bind(this);
       request.send(JSON.stringify(playerGuess));
