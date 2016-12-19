@@ -44,7 +44,7 @@ Game.prototype = {
 
 //UNTESTED
   getPlayersFromDb: function(){
-    this.runDbQuery({}, function(docs){console.log("this", this); this.players = docs || [];}, 'game', 'players');
+    this.runDbQuery({}, function(docs){ this.players = docs || [];}, 'game', 'players');
   },
 
   sendClientSafeMarkersFromDb: function(res){
@@ -58,7 +58,7 @@ Game.prototype = {
     },
     function(docs){
       res.json(docs)
-    }, 
+    },
     'game',
     'gameStates'
     );

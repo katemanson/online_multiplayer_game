@@ -9,10 +9,10 @@ window.onload = function() {
   var mapWrapper = new MapWrapper(mapOptions);
   mapWrapper.getMarkers();
 
-  
-  mapWrapper.handleAnswer(answerForm);
 
-  answerForm.onsubmit = function(e){
+  // mapWrapper.handleAnswer(answerForm);
+  //
+  // answerForm.onsubmit = function(e){
     // e.preventDefault();
 
     // var playerName = document.getElementById('name-input').value;
@@ -35,7 +35,7 @@ window.onload = function() {
     // console.log(e);
 
 
-  }
+  // }
 
 
 
