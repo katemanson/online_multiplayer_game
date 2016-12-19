@@ -12,9 +12,9 @@ var Game = function(){
 
 Game.prototype = {
 
-  addPlayer: function(playerName, res){
+  addPlayer: function(playerGuess, res){
     var color = this.colors.getNextColor();
-    var options = {name: playerName, color: color};
+    var options = {name: playerGuess.playerName, color: color};
     var player = new Player(options);
     var url = 'mongodb://localhost:27017/game';
     MongoClient.connect(url, function(err, db){
@@ -24,10 +24,22 @@ Game.prototype = {
       var collection = db.collection('players');
       collection.insert(player, function(err, dbResponse){ 
         this.players.push(player);
-        this.sendClientSafeMarkersFromDb(res, player._id);
+        playerGuess.playerId = player._id;
+        this.updateGameState(playerGuess, res);
         db.close();
       }.bind(this));
     }.bind(this));
+  },
+
+  updateGameState: function(playerGuess, res){
+    var player = this.players.find(function(player){
+      return player._id === playerGuess.playerId;
+    });
+    playerGuess.playerName = player.name;
+    console.log('playerGuess', playerGuess);
+
+    // this.sendClientSafeMarkersFromDb
+
   },
 
   runDbQuery: function(projection, runMeWhenDone, database, dbCollection){

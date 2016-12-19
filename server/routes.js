@@ -19,8 +19,11 @@ app.get('/markers', function(req, res){
 });
 
 app.post('/game', function(req, res){
-  if ( req.body.playerId === null ){
-    game.addPlayer(req.body.playerName, res);
+  //if req.body has playerName, need to add new player
+  if ( !req.body.playerId ){
+    game.addPlayer(req.body, res);
+  } else {
+    game.updateGameState(req.body, res);
   }
 });
 
