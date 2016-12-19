@@ -5,13 +5,14 @@ var Game = require('./game.js');
 var bodyParser = require('body-parser');
 
 var game = new Game();
+game.getPlayersFromDb();
+game.getGameStateFromDb();
 
 app.use(bodyParser.json());
 
 app.get('/', function (req, res){
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
-
 
 app.get('/markers', function(req, res){
   game.sendClientSafeMarkersFromDb(res);
