@@ -14,13 +14,17 @@ app.get('/markers', function(req, res){
   game.sendClientSafeMarkersFromDb(res);
 });
 
+app.post('/players', function(req, res){
+  var player = new Player()
+  game.addPlayerToDb(req, res, player);
+})
 
 app.use(express.static(__dirname + '/../client/build'));
 
 //CREATE
-app.post('/player', function(req,res) {
+app.post('/players', function(req,res) {
   console.log('body', req.body);
-  // var url = 'mongodb://localhost:27017/game';
+  var url = 'mongodb://localhost:27017/game';
   //PLAYER NAME FROM req.body.playerName (I THINK)
   //ASSIGN A COLOUR NOT ALREADY ASSIGNED
   // MongoClient.connect(url, function(err, db) {

@@ -84,7 +84,7 @@ MapWrapper.prototype = {
     var playerId = localStorage.getItem('playerId');
     document.getElementById('answer-box').style.display = "block";
     if (playerId) {
-      document.getElementById('username-div').style.display = "none";      
+      document.getElementById('username-div').style.display = "none";
     }
   },
 

@@ -10,7 +10,9 @@ var Game = function(){
 
 Game.prototype = {
 
-  addPlayerToDb: function(player){
+  addPlayer: function(req, res, player){
+
+    this.players.push(player);
 
     var url = 'mongodb://localhost:27017/game';
     MongoClient.connect(url, function(err, db){
@@ -33,14 +35,16 @@ Game.prototype = {
       };
       var collection = db.collection(dbCollection);
       collection.find({}, projection).toArray(function(err, docs){
+
         runMeWhenDone(docs);
         db.close();
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   },
 
+//UNTESTED
   getPlayersFromDb: function(){
-    this.runDbQuery({}, function(docs){this.players = docs}, 'game', 'players');
+    this.runDbQuery({}, function(docs){console.log("this", this); this.players = docs || [];}, 'game', 'players');
   },
 
   sendClientSafeMarkersFromDb: function(res){
@@ -57,7 +61,7 @@ Game.prototype = {
     }, 
     'game',
     'gameStates'
-  );
+    );
   }
 
 };
