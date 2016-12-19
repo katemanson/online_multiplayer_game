@@ -2,24 +2,25 @@ var mongodb = require('mongodb');
 var ObjectID = mongodb.ObjectID;
 var MongoClient = require('mongodb').MongoClient;
 var Player = require('./player.js');
+var Colors = require('./colors.js');
 
 var Game = function(){
   this.players = [];
   this.gameState = [];
+  this.colors = new Colors();
 };
 
 Game.prototype = {
 
   addPlayer: function(playerName, res){
-    // var color = this.getNextColor();
-    var color = 'ff0000';
+    var color = this.colors.getNextColor();
     var options = {name: playerName, color: color};
     var player = new Player(options);
     var url = 'mongodb://localhost:27017/game';
     MongoClient.connect(url, function(err, db){
       if(err){
         throw err;
-      };
+      }
       var collection = db.collection('players');
       collection.insert(player, function(err, dbResponse){ 
         this.players.push(player);
@@ -35,7 +36,7 @@ Game.prototype = {
     MongoClient.connect(url, function(err, db){
       if(err){
         throw err;
-      };
+      }
       var collection = db.collection(dbCollection);
       collection.find({}, projection).toArray(function(err, docs){
 
