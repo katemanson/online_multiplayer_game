@@ -14,6 +14,10 @@ form {
   font-family: Verdana, Geneva, sans-serif;
 }
 
+.gm-style-mtc {
+  display: none;
+}
+
 #answer-box {
   width: 200px;
   height: 300px;
