@@ -3,9 +3,6 @@ var MongoClient = require('mongodb').MongoClient;
 var Game = function(){
   this.players = [];
   this.gameState = [];
-  this.returnData = "";
-
-  this.getPlayersFromDb();
 };
 
 Game.prototype = {
@@ -23,8 +20,9 @@ Game.prototype = {
       collection.insert(player);
       db.close();
     });
-    this.getPlayersFromDb();
   },
+
+
 
   runDbQuery: function(projection, runMeWhenDone, database, dbCollection){
 
@@ -42,10 +40,28 @@ Game.prototype = {
     });
   },
 
-//UNTESTED
+//UPDATED
   getPlayersFromDb: function(){
-    this.runDbQuery({}, function(docs){console.log("this", this); this.players = docs || [];}, 'game', 'players');
+    this.runDbQuery({}, 
+      function(docs){
+        this.players = docs;
+      }.bind(this), 
+      'game', 
+      'players');
   },
+//END UPDATED
+
+//NEW
+  getGameStateFromDb: function(){
+    this.runDbQuery({}, 
+      function(docs){
+        this.gameState = docs;
+      }.bind(this), 
+      'game', 
+      'gameStates'
+      );
+  },
+//END NEW
 
   sendClientSafeMarkersFromDb: function(res){
     var markersForClient = this.runDbQuery({

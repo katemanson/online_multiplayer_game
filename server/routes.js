@@ -4,6 +4,8 @@ var path = require('path');
 var Game = require('./game.js');
 
 var game = new Game();
+game.getPlayersFromDb();
+game.getGameStateFromDb();
 
 app.get('/', function (req, res){
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
