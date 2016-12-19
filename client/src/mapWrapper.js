@@ -141,11 +141,12 @@ MapWrapper.prototype = {
       request.setRequestHeader("Content-Type", "application/json");
       request.onload = function() {
         if(request.status === 200) {
-          console.log('request responsetext', request.responseText)
+          var responseObject = JSON.parse(request.responseText);
+          this.populateMarkers(responseObject.markersData);
         }
-      };
+      }.bind(this);
       request.send(JSON.stringify(playerGuess));
-    };
+    }.bind(this);
   }
 
 
