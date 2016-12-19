@@ -5,76 +5,76 @@ var MapWrapper = function(options){
     center: options.center,
     zoom: options.zoom,
     styles: [
-     {
-       'featureType': 'administrative',
-       'elementType': 'geometry.fill',
-       'stylers': [
-         {'visibility': 'off'}
-       ]
-     },
-     {
-      'featureType': 'administrative.country',
-      'elementType': 'labels',
-      'stylers': [
-        {'visibility': 'off'}
-      ]
-     },
-     {
-       'featureType': 'administrative.land_parcel',
-       'stylers': [
-         {'visibility': 'off'}
-       ]
-     },
-     {
-       'featureType': 'administrative.locality',
-       'stylers': [
-         {'visibility': 'off'}
-       ]
-     },
-     {
-       'featureType': 'administrative.neighborhood',
-       'stylers': [
-         {'visibility': 'off'}
-       ]
-     },
-     {
-       'featureType': 'administrative.province',
-       'stylers': [
-         {'visibility': 'off'}
-       ]
-     },
-     {
-       'featureType': 'poi',
-       'stylers': [
-         {'visibility': 'off'}
-       ]
-     },
-     {
-       'featureType': 'road',
-       'stylers': [
-         {'visibility': 'off'}
-       ]
-     },
-     {
-       'featureType': 'transit',
-       'stylers': [
-         {'visibility': 'off'}
-       ]
-     },
-     {
-       'featureType': 'water',
-       'elementType': 'labels',
-       'stylers':
-       [
-         {'visibility': 'off'}
-       ]
-     }
-   ]
+      {
+        'featureType': 'administrative',
+        'elementType': 'geometry.fill',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'administrative.country',
+        'elementType': 'labels',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'administrative.land_parcel',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'administrative.locality',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'administrative.neighborhood',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'administrative.province',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'poi',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'road',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'transit',
+        'stylers': [
+          {'visibility': 'off'}
+        ]
+      },
+      {
+        'featureType': 'water',
+        'elementType': 'labels',
+        'stylers':
+        [
+          {'visibility': 'off'}
+        ]
+      }
+    ]
   }
-  );
-  this.markers = [];
-  var answerForm = document.getElementById('answer-form');
-  answerForm.onsubmit = this.handleAnswer();
+);
+this.markers = [];
+var answerForm = document.getElementById('answer-form');
+answerForm.onsubmit = this.handleAnswer();
 };
 
 MapWrapper.prototype = {
@@ -99,11 +99,11 @@ MapWrapper.prototype = {
     var request = new XMLHttpRequest();
     request.open("GET", url);
     request.onload = function () {
-        if (request.status === 200) {
-            var jsonString = request.responseText;
-            var markersData = JSON.parse(jsonString);
-            this.populateMarkers(markersData);
-        }
+      if (request.status === 200) {
+        var jsonString = request.responseText;
+        var markersData = JSON.parse(jsonString);
+        this.populateMarkers(markersData);
+      }
     }.bind(this);
     request.send();
   },
@@ -126,29 +126,27 @@ MapWrapper.prototype = {
   handleAnswer: function(){
     return function(event){
       event.preventDefault();
-        var playerGuess = {
-          playerId: window.localStorage.getItem('playerId'),
-          playerName: event.target["0"].value,
-          population: event.target["1"].value,
-          alpha2Code: event.target["2"].value
+      var playerGuess = {
+        playerId: window.localStorage.getItem('playerId'),
+        playerName: event.target["0"].value,
+        population: event.target["1"].value,
+        alpha2Code: event.target["2"].value
+      }
+
+      var request = new XMLHttpRequest();
+      var url = "http://localhost:3000/game"
+      request.open("POST", url);
+      request.setRequestHeader("Content-Type", "application/json");
+      request.onload = function() {
+        if(request.status === 200) {
         }
-
-
-      console.log(event);
-    }
+      };
+      request.send(JSON.stringify(playerGuess));
+    };
   }
+
 
 
 };
 
 module.exports = MapWrapper;
-
-// var request = new XMLHttpRequest();
-//   request.open("POST", url);
-//   request.setRequestHeader("Content-Type", "application/json");
-//   request.onload = function() {
-//     if(request.status === 200) {
-//     }
-//   };
-//   request.send(JSON.stringify(account));
-// };
