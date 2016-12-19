@@ -11,7 +11,6 @@ app.get('/', function (req, res){
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
-
 app.get('/markers', function(req, res){
   game.sendClientSafeMarkersFromDb(res);
 });
@@ -25,7 +24,6 @@ app.use(express.static(__dirname + '/../client/build'));
 
 //CREATE
 app.post('/players', function(req,res) {
-  console.log('body', req.body);
   var url = 'mongodb://localhost:27017/game';
   //PLAYER NAME FROM req.body.playerName (I THINK)
   //ASSIGN A COLOUR NOT ALREADY ASSIGNED

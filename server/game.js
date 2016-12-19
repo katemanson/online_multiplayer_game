@@ -22,8 +22,6 @@ Game.prototype = {
     });
   },
 
-
-
   runDbQuery: function(projection, runMeWhenDone, database, dbCollection){
 
     var url = 'mongodb://localhost:27017/' + database;
