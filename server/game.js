@@ -22,7 +22,7 @@ Game.prototype = {
         throw err;
       }
       var collection = db.collection('players');
-      collection.insert(player, function(err, dbResponse){ 
+      collection.insert(player, function(err, dbResponse){
         this.players.push(player);
         playerGuess.playerId = player._id;
         this.updateGameState(playerGuess, res);
@@ -48,18 +48,17 @@ Game.prototype = {
       }
       var collection = db.collection('gameStates');
       collection.update(
-      { 
-        alpha2Code: playerGuess.alpha2Code 
-      }, 
-      { 
-        $set: { 
-          position: {lat: 0, lng: 0},
-          playerId: playerGuess.playerId, 
+      {
+        alpha2Code: playerGuess.alpha2Code
+      },
+      {
+        $set: {
+          playerId: playerGuess.playerId,
           label: "<p><b>A Country</b></p><p>" + playerGuess.playerName + "</p>",
           color: player.color,
           bestGuess: playerGuess.population
         }
-      }, 
+      },
       function(err, doc){
         if(err){
           throw err;
@@ -88,20 +87,20 @@ Game.prototype = {
   },
 
   getPlayersFromDb: function(){
-    this.runDbQuery({}, 
+    this.runDbQuery({},
       function(docs){
         this.players = docs;
-      }.bind(this), 
-      'game', 
+      }.bind(this),
+      'game',
       'players');
   },
 
   getGameStateFromDb: function(){
-    this.runDbQuery({}, 
+    this.runDbQuery({},
       function(docs){
         this.gameState = docs;
-      }.bind(this), 
-      'game', 
+      }.bind(this),
+      'game',
       'gameStates'
       );
   },
