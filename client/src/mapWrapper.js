@@ -101,8 +101,10 @@ MapWrapper.prototype = {
     request.onload = function () {
       if (request.status === 200) {
         var jsonString = request.responseText;
-        var markersData = JSON.parse(jsonString);
+        var responseObject = JSON.parse(jsonString);
+        var markersData = responseObject.markersData;
         this.populateMarkers(markersData);
+        console.log('response data', markersData)
       }
     }.bind(this);
     request.send();
@@ -139,6 +141,7 @@ MapWrapper.prototype = {
       request.setRequestHeader("Content-Type", "application/json");
       request.onload = function() {
         if(request.status === 200) {
+          console.log('request responsetext', request.responseText)
         }
       };
       request.send(JSON.stringify(playerGuess));

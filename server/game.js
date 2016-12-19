@@ -10,7 +10,7 @@ var Game = function(){
 
 Game.prototype = {
 
-  addPlayer: function(playerName){
+  addPlayer: function(playerName, res){
     // var color = this.getNextColor();
     var color = 'ff0000';
     var options = {name: playerName, color: color};
@@ -23,7 +23,7 @@ Game.prototype = {
       var collection = db.collection('players');
       collection.insert(player, function(err, dbResponse){ 
         this.players.push(player);
-        console.log("this.players", this.players);
+        this.sendClientSafeMarkersFromDb(res, player._id);
         db.close();
       }.bind(this));
     }.bind(this));
@@ -45,45 +45,45 @@ Game.prototype = {
     });
   },
 
-//UPDATED
-getPlayersFromDb: function(){
-  this.runDbQuery({}, 
-    function(docs){
-      this.players = docs;
-    }.bind(this), 
-    'game', 
-    'players');
-},
-//END UPDATED
+  getPlayersFromDb: function(){
+    this.runDbQuery({}, 
+      function(docs){
+        this.players = docs;
+      }.bind(this), 
+      'game', 
+      'players');
+  },
 
-//NEW
-getGameStateFromDb: function(){
-  this.runDbQuery({}, 
+  getGameStateFromDb: function(){
+    this.runDbQuery({}, 
+      function(docs){
+        this.gameState = docs;
+      }.bind(this), 
+      'game', 
+      'gameStates'
+      );
+  },
+
+  sendClientSafeMarkersFromDb: function(res, clientPlayerId){
+    var markersForClient = this.runDbQuery({
+      _id: 0,
+      position: 1,
+      alpha2Code: 1,
+      playerId: 1,
+      label: 1,
+      color: 1
+    },
     function(docs){
-      this.gameState = docs;
-    }.bind(this), 
-    'game', 
+      var data = {
+        clientPlayerId: clientPlayerId,
+        markersData: docs
+      }
+      res.json(data);
+    },
+    'game',
     'gameStates'
     );
-},
-//END NEW
-
-sendClientSafeMarkersFromDb: function(res){
-  var markersForClient = this.runDbQuery({
-    _id: 0,
-    position: 1,
-    alpha2Code: 1,
-    playerId: 1,
-    label: 1,
-    color: 1
-  },
-  function(docs){
-    res.json(docs)
-  },
-  'game',
-  'gameStates'
-  );
-}
+  }
 
 };
 
