@@ -9,34 +9,4 @@ window.onload = function() {
   var mapWrapper = new MapWrapper(mapOptions);
   mapWrapper.getMarkers();
 
-
-  // mapWrapper.handleAnswer(answerForm);
-  //
-  // answerForm.onsubmit = function(e){
-    // e.preventDefault();
-
-    // var playerName = document.getElementById('name-input').value;
-
-    // if (!playerName){
-    //   var url = "http://localhost:3000/players";
-    //   var request = new XMLHttpRequest();
-    //   request.open("POST", url);
-    //   request.setRequestHeader("Content-Type", "application/json");
-    //   request.onload = function(){
-    //     if (request.status === 200){
-    //     }
-    //   };
-    //   request.send(JSON.stringify(this));
-    // },
-
-    // var playerGuess = document.getElementById('answer-input').value;
-    // console.log(playerName);
-    // console.log(playerGuess);
-    // console.log(e);
-
-
-  // }
-
-
-
 };
