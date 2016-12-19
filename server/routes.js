@@ -19,8 +19,9 @@ app.get('/markers', function(req, res){
 });
 
 app.post('/game', function(req, res){
-
-  console.log(req.body);
+  if ( req.body.playerId === null ){
+    game.addPlayer(req.body.playerName);
+  }
 });
 
 app.use(express.static(__dirname + '/../client/build'));
