@@ -73,6 +73,8 @@ var MapWrapper = function(options){
   }
   );
   this.markers = [];
+  var answerForm = document.getElementById('answer-form');
+  answerForm.onsubmit = this.handleAnswer(e);
 };
 
 MapWrapper.prototype = {
@@ -115,9 +117,24 @@ MapWrapper.prototype = {
       var marker = new Marker(markerOptions);
       this.addMarker(marker);
     }.bind(this));
+  },
+
+  handleAnswer: function(e){
+    e.preventDefault();
+
   }
 
 
 };
 
 module.exports = MapWrapper;
+
+var request = new XMLHttpRequest();
+  request.open("POST", url);
+  request.setRequestHeader("Content-Type", "application/json");
+  request.onload = function() {
+    if(request.status === 200) {
+    }
+  };
+  request.send(JSON.stringify(account));
+};

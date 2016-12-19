@@ -9,12 +9,14 @@ window.onload = function() {
   var mapWrapper = new MapWrapper(mapOptions);
   mapWrapper.getMarkers();
 
-  var answerForm = document.getElementById('answer-form');
+  
+  mapWrapper.handleAnswer(answerForm);
+
   answerForm.onsubmit = function(e){
     // e.preventDefault();
 
     // var playerName = document.getElementById('name-input').value;
-    
+
     // if (!playerName){
     //   var url = "http://localhost:3000/players";
     //   var request = new XMLHttpRequest();
@@ -38,4 +40,3 @@ window.onload = function() {
 
 
 };
-
