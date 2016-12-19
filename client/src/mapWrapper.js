@@ -74,7 +74,7 @@ var MapWrapper = function(options){
   );
   this.markers = [];
   var answerForm = document.getElementById('answer-form');
-  answerForm.onsubmit = this.handleAnswer(event);
+  answerForm.onsubmit = this.handleAnswer();
 };
 
 MapWrapper.prototype = {
@@ -84,7 +84,11 @@ MapWrapper.prototype = {
 
   handleMarkerClick: function(returnValue){
     var playerId = localStorage.getItem('playerId');
-    document.getElementById('answer-box').style.display = "block";
+    var answerForm = document.getElementById('answer-form');
+    var alpha2CodeInput = document.getElementById('alpha2code-input');
+    alpha2CodeInput.value = returnValue;
+    var answerBox = document.getElementById('answer-box');
+    answerBox.style.display = "block";
     if (playerId) {
       document.getElementById('username-div').style.display = "none";
     }
@@ -119,10 +123,19 @@ MapWrapper.prototype = {
     }.bind(this));
   },
 
-  handleAnswer: function(event){
-    event.preventDefault();
-    console.log(event);
+  handleAnswer: function(){
+    return function(event){
+      event.preventDefault();
+        var playerGuess = {
+          playerId: window.localStorage.getItem('playerId'),
+          playerName: event.target["0"].value,
+          population: event.target["1"].value,
+          alpha2Code: event.target["2"].value
+        }
 
+
+      console.log(event);
+    }
   }
 
 

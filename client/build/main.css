@@ -48,6 +48,10 @@ form {
   margin-bottom: 10px;
 }
 
+#alpha2code-input {
+  display: none;
+}
+
 #submit {
   width: 100%;
   text-align: center;
@@ -63,6 +67,6 @@ form {
 }
 
 #world-map {
-  width: 100%; 
+  width: 100%;
   height: 100%;
 }
