@@ -143,7 +143,8 @@ MapWrapper.prototype = {
       request.setRequestHeader("Content-Type", "application/json");
       request.onload = function() {
         if(request.status === 200) {
-          var responseObject = JSON.parse(request.responseText);
+          var responseObject = JSON.parse(request.responseText); 
+          console.log("marker data", responseObject.markersData);
           this.populateMarkers(responseObject.markersData);
           window.localStorage.setItem('playerId', responseObject.clientPlayerId);
         }

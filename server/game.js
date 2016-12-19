@@ -33,13 +33,42 @@ Game.prototype = {
 
   updateGameState: function(playerGuess, res){
     var player = this.players.find(function(player){
-      return player._id === playerGuess.playerId;
+      console.log('player._id', typeof(player._id));
+      console.log('guess player id', typeof(playerGuess.playerId));
+      var objectIdPlayerId = new ObjectID(playerGuess.playerId);
+      return player._id.equals(objectIdPlayerId);
     });
+    console.log('player', player);
     playerGuess.playerName = player.name;
     console.log('playerGuess', playerGuess);
-
-    // this.sendClientSafeMarkersFromDb
-
+    var url = 'mongodb://localhost:27017/game';
+    MongoClient.connect(url, function(err, db){
+      if(err){
+        throw err;
+      }
+      var collection = db.collection('gameStates');
+      collection.update(
+      { 
+        alpha2Code: playerGuess.alpha2Code 
+      }, 
+      { 
+        $set: { 
+          position: {lat: 0, lng: 0},
+          playerId: playerGuess.playerId, 
+          label: "<p><b>A Country</b></p><p>" + playerGuess.playerName + "</p>",
+          color: player.color,
+          bestGuess: playerGuess.population
+        }
+      }, 
+      function(err, doc){
+        if(err){
+          throw err;
+        };
+        this.sendClientSafeMarkersFromDb(playerGuess.playerId, res);
+        db.close();
+      }.bind(this)
+      );
+    }.bind(this));
   },
 
   runDbQuery: function(projection, runMeWhenDone, database, dbCollection){
@@ -77,7 +106,7 @@ Game.prototype = {
       );
   },
 
-  sendClientSafeMarkersFromDb: function(res, clientPlayerId){
+  sendClientSafeMarkersFromDb: function(clientPlayerId, res){
     var markersForClient = this.runDbQuery({
       _id: 0,
       position: 1,

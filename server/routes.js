@@ -15,7 +15,7 @@ app.get('/', function (req, res){
 });
 
 app.get('/markers', function(req, res){
-  game.sendClientSafeMarkersFromDb(res, "");
+  game.sendClientSafeMarkersFromDb("", res);
 });
 
 app.post('/game', function(req, res){
