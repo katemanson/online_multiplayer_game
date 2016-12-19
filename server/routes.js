@@ -2,8 +2,11 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var Game = require('./game.js');
+var bodyParser = require('body-parser');
 
 var game = new Game();
+
+app.use(bodyParser.json());
 
 app.get('/', function (req, res){
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
@@ -15,9 +18,9 @@ app.get('/markers', function(req, res){
 });
 
 app.post('/game', function(req, res){
-  
 
-})
+  console.log(req.body);
+});
 
 app.use(express.static(__dirname + '/../client/build'));
 
