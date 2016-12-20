@@ -45,7 +45,7 @@ Game.prototype = {
         throw err;
       }
       var collection = db.collection('gameStates');
-      collection.update(
+      collection.findOneAndUpdate(
       {
         alpha2Code: playerGuess.alpha2Code
       },
@@ -57,16 +57,29 @@ Game.prototype = {
           bestGuess: playerGuess.population
         }
       },
+      {
+        returnOriginal: false
+      },
       function(err, doc){
         if(err){
           throw err;
         };
+        this.gameState.forEach(function(element, index){
+            if(element.alpha2Code === doc.value.alpha2Code){
+              this.gameState[index] = doc.value;
+
+            };
+        }.bind(this));
+
         this.sendClientSafeMarkersFromDb(playerGuess.playerId, res);
         db.close();
+        // console.log(doc);
       }.bind(this)
       );
     }.bind(this));
   },
+
+
 
   runDbQuery: function(projection, runMeWhenDone, database, dbCollection){
 
@@ -107,7 +120,7 @@ Game.prototype = {
     var markersForClient = this.runDbQuery({
       _id: 0,
       position: 1,
-      countryName: 1, 
+      countryName: 1,
       alpha2Code: 1,
       playerId: 1,
       labelStatus: 1,
