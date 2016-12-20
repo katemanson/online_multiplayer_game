@@ -33,14 +33,10 @@ Game.prototype = {
 
   updateGameState: function(playerGuess, res){
     var player = this.players.find(function(player){
-      console.log('player._id', typeof(player._id));
-      console.log('guess player id', typeof(playerGuess.playerId));
       var objectIdPlayerId = new ObjectID(playerGuess.playerId);
       return player._id.equals(objectIdPlayerId);
     });
-    console.log('player', player);
     playerGuess.playerName = player.name;
-    console.log('playerGuess', playerGuess);
     var url = 'mongodb://localhost:27017/game';
     MongoClient.connect(url, function(err, db){
       if(err){
@@ -54,7 +50,7 @@ Game.prototype = {
       {
         $set: {
           playerId: playerGuess.playerId,
-          label: "<p><b>A Country</b></p><p>" + playerGuess.playerName + "</p>",
+          labelStatus: "<p>Held by <b>" + playerGuess.playerName + "</b></p>",
           color: player.color,
           bestGuess: playerGuess.population
         }
@@ -109,9 +105,10 @@ Game.prototype = {
     var markersForClient = this.runDbQuery({
       _id: 0,
       position: 1,
+      countryName: 1, 
       alpha2Code: 1,
       playerId: 1,
-      label: 1,
+      labelStatus: 1,
       color: 1
     },
     function(docs){

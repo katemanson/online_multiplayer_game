@@ -45,7 +45,7 @@ fs.readFile('./countryData.json', function(err, data) {
           countryName: countryObject.name,
           alpha2Code: countryObject.alpha2Code,
           playerId: "",
-          label: "<p><b>" + countryObject.name + "</b></p><p>" + "Unconquered</p>",
+          labelStatus: "Unconquered",
           color: "ffffff",
           bestGuess: -1
         };

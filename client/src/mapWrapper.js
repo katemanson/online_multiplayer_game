@@ -125,7 +125,7 @@ MapWrapper.prototype = {
         googleMap: this.googleMap,
         position: markerData.position,
         color: markerData.color,
-        label: markerData.label
+        label: "<p><b>" + markerData.countryName + "</p></b><p>" + markerData.labelStatus + "</p>"
       };
 
       var marker = new Marker(markerOptions);
