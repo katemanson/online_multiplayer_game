@@ -166,7 +166,11 @@ MapWrapper.prototype = {
           
           var resultDiv = document.getElementById('result-div');
           resultDiv.style.display = "block";
-          resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b>" + countryName + "</b>.";
+          if (responseObject.bestGuess){
+            resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b>" + countryName + "</b>.</p>";
+          } else {
+            resultDiv.innerHTML = "<p>Nope, sorry... </p><p>your guess wasn't<br> close enough.</p>";
+          }
           resultDiv.className = "animation-start";
           setTimeout(function(){
             resultDiv.className = "animation-stop";
