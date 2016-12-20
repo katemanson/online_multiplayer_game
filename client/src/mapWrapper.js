@@ -92,6 +92,7 @@ MapWrapper.prototype = {
     if (playerId) {
       document.getElementById('username-div').style.display = "none";
     }
+
   },
 
   getMarkers: function(){
@@ -111,7 +112,13 @@ MapWrapper.prototype = {
   },
 
   populateMarkers: function(markersData){
+
+    this.markers.forEach(function(marker){
+      marker.googleMapMarker.setMap(null);
+    });
+
     markersData.forEach( function(markerData){
+
       var markerOptions = {
         returnValue: markerData.alpha2Code,
         parentWrapper: this,
@@ -120,7 +127,11 @@ MapWrapper.prototype = {
         color: markerData.color,
         label: markerData.label
       };
+
       var marker = new Marker(markerOptions);
+
+
+
       this.addMarker(marker);
     }.bind(this));
   },
@@ -143,7 +154,7 @@ MapWrapper.prototype = {
       request.setRequestHeader("Content-Type", "application/json");
       request.onload = function() {
         if(request.status === 200) {
-          var responseObject = JSON.parse(request.responseText); 
+          var responseObject = JSON.parse(request.responseText);
           console.log("marker data", responseObject.markersData);
           this.populateMarkers(responseObject.markersData);
           window.localStorage.setItem('playerId', responseObject.clientPlayerId);

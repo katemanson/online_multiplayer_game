@@ -44,7 +44,7 @@ app.use(express.static(__dirname + '/../client/build'));
 //   // });
 // });
 
-var server = app.listen(3000, function () {
+var server = app.listen(3000,'localhost', function () {
   var host = server.address().address;
   var port = server.address().port;
   console.log('Ready to take over the world...', host, port);

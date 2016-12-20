@@ -14,7 +14,7 @@ Marker.prototype = {
     this.googleMapMarker = new google.maps.Marker({
       position: options.position,
       map: options.googleMap,
-      icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + options.color)
+      icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + options.color
     });
     this.infoWindow = new google.maps.InfoWindow({content: options.label});
   },
@@ -34,6 +34,7 @@ Marker.prototype = {
   markerClicked: function(){
     return function(){
       this.parentWrapper.handleMarkerClick(this.returnValue);
+
     }.bind(this);
   },
 
