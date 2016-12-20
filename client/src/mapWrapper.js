@@ -165,6 +165,7 @@ MapWrapper.prototype = {
           //^has to be a better way of getting country name?
           
           var resultDiv = document.getElementById('result-div');
+          resultDiv.innerHTMl = "";
           resultDiv.style.display = "block";
           if (responseObject.bestGuess){
             resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b><br>" + countryName + "</b>.</p>";
