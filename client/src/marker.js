@@ -34,7 +34,6 @@ Marker.prototype = {
   markerClicked: function(){
     return function(){
       this.parentWrapper.handleMarkerClick(this.returnValue);
-
     }.bind(this);
   },
 
