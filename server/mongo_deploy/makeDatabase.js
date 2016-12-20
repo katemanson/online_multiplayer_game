@@ -44,8 +44,9 @@ fs.readFile('./countryData.json', function(err, data) {
           position: {lat: countryObject.latlng[0], lng: countryObject.latlng[1]},
           countryName: countryObject.name,
           alpha2Code: countryObject.alpha2Code,
+          population: countryObject.population,
           playerId: "",
-          labelStatus: "Unconquered",
+          labelStatus: "Not yet captured",
           color: "ffffff",
           bestGuess: -1
         };

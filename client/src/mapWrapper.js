@@ -109,7 +109,6 @@ MapWrapper.prototype = {
         var responseObject = JSON.parse(jsonString);
         var markersData = responseObject.markersData;
         this.populateMarkers(markersData);
-        console.log('response data', markersData)
       }
     }.bind(this);
     request.send();
@@ -157,8 +156,23 @@ MapWrapper.prototype = {
       request.onload = function() {
         if(request.status === 200) {
           var responseObject = JSON.parse(request.responseText);
-          console.log("marker data", responseObject.markersData);
           this.populateMarkers(responseObject.markersData);
+
+          var country = responseObject.markersData.find(function(markerData){
+            return markerData.alpha2Code === playerGuess.alpha2Code;
+          });
+          var countryName = country.countryName;
+          //^has to be a better way of getting country name?
+          
+          var resultDiv = document.getElementById('result-div');
+          resultDiv.style.display = "block";
+          resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b>" + countryName + "</b>.";
+          resultDiv.className = "animation-start";
+          setTimeout(function(){
+            resultDiv.className = "animation-stop";
+            resultDiv.style.display = "none";
+          }, 2500);
+
           window.localStorage.setItem('playerId', responseObject.clientPlayerId);
         }
       }.bind(this);
