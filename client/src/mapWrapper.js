@@ -4,6 +4,7 @@ var MapWrapper = function(options){
   this.googleMap = new google.maps.Map(options.container, {
     center: options.center,
     zoom: options.zoom,
+    streetViewControl: options.streetViewControl,
     styles: [
       {
         'featureType': 'administrative',

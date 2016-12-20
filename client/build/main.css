@@ -14,6 +14,25 @@ form {
   font-family: Verdana, Geneva, sans-serif;
 }
 
+#banner {
+  color: #fff;
+  background-color: #333;
+  border-bottom: 30px solid #000;
+} 
+
+#banner h1 {
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  padding: .3em .3em .3em .3em;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 5em;
+}
+
+.gm-style-mtc {
+  display: none;
+}
+
 #answer-box {
   width: 200px;
   height: 300px;
@@ -68,5 +87,5 @@ form {
 
 #world-map {
   width: 100%;
-  height: 100%;
+  height: 90%;
 }
