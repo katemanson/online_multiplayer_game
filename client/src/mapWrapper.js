@@ -167,7 +167,7 @@ MapWrapper.prototype = {
           var resultDiv = document.getElementById('result-div');
           resultDiv.style.display = "block";
           if (responseObject.bestGuess){
-            resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b>" + countryName + "</b>.</p>";
+            resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b><br>" + countryName + "</b>.</p>";
           } else {
             resultDiv.innerHTML = "<p>Nope, sorry... </p><p>your guess wasn't<br> close enough.</p>";
           }
