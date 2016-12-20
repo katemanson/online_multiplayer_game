@@ -93,7 +93,6 @@ MapWrapper.prototype = {
     if (playerId) {
       document.getElementById('username-div').style.display = "none";
     }
-
   },
 
   getMarkers: function(){
@@ -126,12 +125,10 @@ MapWrapper.prototype = {
         googleMap: this.googleMap,
         position: markerData.position,
         color: markerData.color,
-        label: markerData.label
+        label: "<p><b>" + markerData.countryName + "</p></b><p>" + markerData.labelStatus + "</p>"
       };
 
       var marker = new Marker(markerOptions);
-
-
 
       this.addMarker(marker);
     }.bind(this));
@@ -164,8 +161,6 @@ MapWrapper.prototype = {
       request.send(JSON.stringify(playerGuess));
     }.bind(this);
   }
-
-
 
 };
 

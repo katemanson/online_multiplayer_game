@@ -5,8 +5,6 @@ var Game = require('./game.js');
 var bodyParser = require('body-parser');
 
 var game = new Game();
-game.getPlayersFromDb();
-game.getGameStateFromDb();
 
 app.use(bodyParser.json());
 
