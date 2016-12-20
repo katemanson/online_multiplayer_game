@@ -6,76 +6,80 @@ var MapWrapper = function(options){
     zoom: options.zoom,
     streetViewControl: options.streetViewControl,
     styles: [
-      {
-        'featureType': 'administrative',
-        'elementType': 'geometry.fill',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'administrative.country',
-        'elementType': 'labels',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'administrative.land_parcel',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'administrative.locality',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'administrative.neighborhood',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'administrative.province',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'poi',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'road',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'transit',
-        'stylers': [
-          {'visibility': 'off'}
-        ]
-      },
-      {
-        'featureType': 'water',
-        'elementType': 'labels',
-        'stylers':
-        [
-          {'visibility': 'off'}
-        ]
-      }
+    {
+      'featureType': 'administrative',
+      'elementType': 'geometry.fill',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'administrative.country',
+      'elementType': 'labels',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'administrative.land_parcel',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'administrative.locality',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'administrative.neighborhood',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'administrative.province',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'poi',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'road',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'transit',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
+      'featureType': 'water',
+      'elementType': 'labels',
+      'stylers':
+      [
+      {'visibility': 'off'}
+      ]
+    }
     ]
   }
-);
-this.markers = [];
-var answerForm = document.getElementById('answer-form');
-answerForm.onsubmit = this.handleAnswer();
+  );
+  this.markers = [];
+  var answerForm = document.getElementById('answer-form');
+  answerForm.onsubmit = this.handleAnswer();
+
+  var zoomOutButton = document.querySelector('#zoom-out');
+  zoomOutButton.onclick = this.zoomOut().bind(this);
+
 };
 
 MapWrapper.prototype = {
@@ -160,7 +164,19 @@ MapWrapper.prototype = {
       }.bind(this);
       request.send(JSON.stringify(playerGuess));
     }.bind(this);
+  },
+
+  zoomOut: function(){
+    return function(event){
+    console.log("map", this.googleMap);
+    this.googleMap.setZoom(2);
+    }.bind(this);
   }
+
+
+
+
+
 
 };
 
