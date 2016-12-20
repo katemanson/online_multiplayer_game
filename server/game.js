@@ -8,6 +8,8 @@ var Game = function(){
   this.players = [];
   this.gameState = [];
   this.colors = new Colors();
+  this.getPlayersFromDb();
+  this.getGameStateFromDb();
 };
 
 Game.prototype = {
