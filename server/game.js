@@ -33,7 +33,7 @@ Game.prototype = {
     }.bind(this));
   },
 
-  isGuessBetter(playerGuess){
+  isGuessBetter: function(playerGuess){
     var guessedCountry = this.gameState.find(function(state){
       return state.alpha2Code === playerGuess.alpha2Code;
     });
