@@ -9,7 +9,7 @@ window.onload = function() {
     container: worldMapDiv, 
     center: {lat: 30, lng: 0}, 
     zoom: 3,
-    disableDefaultUI: true};
+    streetViewControl: false};
   var mapWrapper = new MapWrapper(mapOptions);
   mapWrapper.getMarkers();
 
