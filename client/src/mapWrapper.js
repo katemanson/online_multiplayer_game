@@ -7,6 +7,13 @@ var MapWrapper = function(options){
     streetViewControl: options.streetViewControl,
     styles: [
     {
+      'featureType': 'all',
+      'elementType': 'labels',
+      'stylers': [
+      {'visibility': 'off'}
+      ]
+    },
+    {
       'featureType': 'administrative',
       'elementType': 'geometry.fill',
       'stylers': [

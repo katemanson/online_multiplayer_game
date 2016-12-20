@@ -14,5 +14,3 @@ window.onload = function() {
   mapWrapper.getMarkers();
 
 };
-
-
