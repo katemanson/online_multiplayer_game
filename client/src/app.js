@@ -8,7 +8,7 @@ window.onload = function() {
   var mapOptions = {
     container: worldMapDiv, 
     center: {lat: 30, lng: 0}, 
-    zoom: 3,
+    zoom: 4,
     streetViewControl: false};
   var mapWrapper = new MapWrapper(mapOptions);
   mapWrapper.getMarkers();
