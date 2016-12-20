@@ -33,50 +33,70 @@ Game.prototype = {
     }.bind(this));
   },
 
-  updateGameState: function(playerGuess, res){
-    var player = this.players.find(function(player){
-      var objectIdPlayerId = new ObjectID(playerGuess.playerId);
-      return player._id.equals(objectIdPlayerId);
+  isGuessBetter(playerGuess){
+    var guessedCountry = this.gameState.find(function(state){
+      return state.alpha2Code === playerGuess.alpha2Code;
     });
-    playerGuess.playerName = player.name;
-    var url = 'mongodb://localhost:27017/game';
-    MongoClient.connect(url, function(err, db){
-      if(err){
-        throw err;
-      }
-      var collection = db.collection('gameStates');
-      collection.findOneAndUpdate(
-      {
-        alpha2Code: playerGuess.alpha2Code
-      },
-      {
-        $set: {
-          playerId: playerGuess.playerId,
-          labelStatus: "<p>Held by <b>" + playerGuess.playerName + "</b></p>",
-          color: player.color,
-          bestGuess: playerGuess.population
-        }
-      },
-      {
-        returnOriginal: false
-      },
-      function(err, doc){
+    var truePopulation = guessedCountry.population;
+    var bestGuess = guessedCountry.bestGuess;
+    var guessDistanceFromTrue = Math.abs(playerGuess.population - truePopulation);
+    var bestDistanceFromTrue = Math.abs(bestGuess - truePopulation);
+    if (guessDistanceFromTrue < bestDistanceFromTrue) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+  updateGameState: function(playerGuess, res){
+
+    if (this.isGuessBetter(playerGuess)){
+
+      var player = this.players.find(function(player){
+        var objectIdPlayerId = new ObjectID(playerGuess.playerId);
+        return player._id.equals(objectIdPlayerId);
+      });
+      playerGuess.playerName = player.name;
+      var url = 'mongodb://localhost:27017/game';
+      MongoClient.connect(url, function(err, db){
         if(err){
           throw err;
-        };
-        this.gameState.forEach(function(element, index){
-            if(element.alpha2Code === doc.value.alpha2Code){
-              this.gameState[index] = doc.value;
+        }
+        var collection = db.collection('gameStates');
+        collection.findOneAndUpdate(
+        {
+          alpha2Code: playerGuess.alpha2Code
+        },
+        {
+          $set: {
+            playerId: playerGuess.playerId,
+            labelStatus: "<p>Held by <b>" + playerGuess.playerName + "</b></p>",
+            color: player.color,
+            bestGuess: playerGuess.population
+          }
+        },
+        {
+          returnOriginal: false
+        },
+        function(err, doc){
+          if(err){
+            throw err;
+          };
 
-            };
-        }.bind(this));
+          // could use getGameStateFromDb, but that is a whole new db query...
+          this.gameState.forEach(function(element, index){
+              if(element.alpha2Code === doc.value.alpha2Code){
+                this.gameState[index] = doc.value;
+              };
+          }.bind(this));
 
-        this.sendClientSafeMarkersFromDb(playerGuess.playerId, res);
-        db.close();
-        // console.log(doc);
-      }.bind(this)
-      );
-    }.bind(this));
+          this.sendClientSafeMarkersFromDb(playerGuess.playerId, res);
+          db.close();
+          // console.log(doc);
+        }.bind(this)
+        );
+      }.bind(this));
+    }
   },
 
 
