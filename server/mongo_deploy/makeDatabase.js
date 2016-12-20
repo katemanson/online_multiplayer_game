@@ -46,7 +46,7 @@ fs.readFile('./countryData.json', function(err, data) {
           alpha2Code: countryObject.alpha2Code,
           population: countryObject.population,
           playerId: "",
-          labelStatus: "Unconquered",
+          labelStatus: "Not yet captured",
           color: "ffffff",
           bestGuess: -1
         };
