@@ -10,7 +10,7 @@ fs.readFile('./countryData.json', function(err, data) {
   fileDataString = data;
   fileDataObject = JSON.parse(fileDataString);
 
-  var url = 'mongodb://localhost:27017/countries';
+  var url = 'mongodb://192.168.0.13:27017/countries';
   MongoClient.connect(url, function(err, db) {
     if (err) {
       throw err;
@@ -27,7 +27,7 @@ fs.readFile('./countryData.json', function(err, data) {
     });
   });
 
-  var gameUrl = 'mongodb://localhost:27017/game';
+  var gameUrl = 'mongodb://192.168.0.13:27017/game';
   MongoClient.connect(gameUrl, function(err, db){
     if (err) {
       throw err;
