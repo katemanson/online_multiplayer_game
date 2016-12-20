@@ -186,7 +186,6 @@ MapWrapper.prototype = {
 
   zoomOut: function(){
     return function(event){
-    console.log("map", this.googleMap);
     this.googleMap.setZoom(2);
     }.bind(this);
   }
