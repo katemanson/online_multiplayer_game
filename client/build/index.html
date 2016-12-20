@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>World Domination</title>
-    <link rel="stylesheet" href="main.css">
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script type="text/javascript" src="bundle.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>World Domination</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script type="text/javascript" src="bundle.js"></script>
 
-  </head>
-  <body>
-  <div id=banner><h1>World Domination</h1></div>
-    <div id="world-map"></div>
+</head>
+<body>
+  <div id=banner>
+    <h1>World Domination</h1>
+    <div id="nav"> 
+      <button id="leaderboard">Leaderboard</button>
+      <button id="zoom-out">Zoom out</button>
+  </div>
+</div>
+<div id="world-map"></div>
 
-    <div id="answer-box">
-      <form id="answer-form">
-        <div id="username-div">
-          Enter a username:
-          <input id="name-input" type="text" name="playerName"><br>
-        </div>
-        <div id="answer-div">
-          What's your guess?
-          <input id="answer-input" type="number" name="answer" min="0">
-        <input id="alpha2code-input" type="text">
-        </div>
-        <input id="submit" type="submit" value="Submit">
-      </form>
+<div id="answer-box">
+  <form id="answer-form">
+    <div id="username-div">
+      Enter a username:
+      <input id="name-input" type="text" name="playerName"><br>
     </div>
-    <div id="footer"></div>
-  </body>
+    <div id="answer-div">
+      What's your guess?
+      <input id="answer-input" type="number" name="answer" min="0">
+      <input id="alpha2code-input" type="text">
+    </div>
+    <input id="submit" type="submit" value="Submit">
+  </form>
+</div>
+<div id="footer"></div>
+</body>
 </html>
