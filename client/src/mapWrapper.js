@@ -93,7 +93,6 @@ MapWrapper.prototype = {
     if (playerId) {
       document.getElementById('username-div').style.display = "none";
     }
-
   },
 
   getMarkers: function(){
@@ -131,8 +130,6 @@ MapWrapper.prototype = {
 
       var marker = new Marker(markerOptions);
 
-
-
       this.addMarker(marker);
     }.bind(this));
   },
@@ -164,8 +161,6 @@ MapWrapper.prototype = {
       request.send(JSON.stringify(playerGuess));
     }.bind(this);
   }
-
-
 
 };
 
