@@ -139,16 +139,16 @@ MapWrapper.prototype = {
           var jsonString = request.responseText;
           var responseObject = JSON.parse(jsonString);
           responseObject.markersData.forEach(function(countryData){
-            var idOfPlayerHoldingCountry = countryData.playerId;
-            if (idOfPlayerHoldingCountry){
-              if (pieData.get(idOfPlayerHoldingCountry) === undefined){
+            var nameOfPlayerHoldingCountry = countryData.playerName;
+            if (nameOfPlayerHoldingCountry){
+              if (pieData.get(nameOfPlayerHoldingCountry) === undefined){
                 currentValue = 0;
               } else {
-                currentValue = pieData.get(idOfPlayerHoldingCountry).countriesHeld;
+                currentValue = pieData.get(nameOfPlayerHoldingCountry).countriesHeld;
               };
               var newValue = currentValue + 1;
               var sliceData = {countriesHeld: newValue, color: countryData.color};
-              pieData.set(idOfPlayerHoldingCountry, sliceData );
+              pieData.set(nameOfPlayerHoldingCountry, sliceData );
             };
           });
 
