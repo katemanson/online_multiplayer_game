@@ -129,35 +129,29 @@ MapWrapper.prototype = {
       var pieData = new Map();
       var url = "http://localhost:3000/markers";
       var request = new XMLHttpRequest();
-      console.log("about to request");
       request.open("GET", url);
       request.onload = function () {
-        console.log("got a response");
         if (request.status === 200) {
           var jsonString = request.responseText;
           var responseObject = JSON.parse(jsonString);
-          console.log("reponse received");
           responseObject.markersData.forEach(function(countryData){
-            // console.log(countryData);
-            if (countryData.playerId){
-              if (pieData.get(countryData.playerId) === undefined){
+            var idOfPlayerHoldingCountry = countryData.playerId;
+            if (idOfPlayerHoldingCountry){
+              if (pieData.get(idOfPlayerHoldingCountry) === undefined){
                 currentValue = 0;
               } else {
-                currentValue = pieData.get(countryData.playerId).y;
+                currentValue = pieData.get(idOfPlayerHoldingCountry).countriesHeld;
               };
               var newValue = currentValue + 1;
-              console.log(currentValue, newValue);
-              var sliceData = {y: newValue, color: countryData.color};
-              // console.log("slice", sliceData);
-              pieData.set(countryData.playerId, sliceData );
+              var sliceData = {countriesHeld: newValue, color: countryData.color};
+              pieData.set(idOfPlayerHoldingCountry, sliceData );
             };
           });
 
           var pieDataArray = [];
           for (key of pieData.keys()){
-            pieDataArray.push({name: key, y: pieData.get(key).y, color: ("#" + pieData.get(key).color)});
+            pieDataArray.push({name: key, y: pieData.get(key).countriesHeld, color: ("#" + pieData.get(key).color)});
           };
-          console.log(pieDataArray);
           PieChart({
             title: "World Powers",
             seriesName: "Countries Held",
