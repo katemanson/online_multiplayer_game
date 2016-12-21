@@ -1,85 +1,22 @@
 var Marker = require('./marker.js');
+var mapStyle = require('./map_style');
+var PieChart = require('./PieChartView.js')
 
 var MapWrapper = function(options){
   this.googleMap = new google.maps.Map(options.container, {
     center: options.center,
     zoom: options.zoom,
     streetViewControl: options.streetViewControl,
-    styles: [
-    {
-      'featureType': 'administrative',
-      'elementType': 'geometry.fill',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'administrative.country',
-      'elementType': 'labels',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'administrative.land_parcel',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'administrative.locality',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'administrative.neighborhood',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'administrative.province',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'poi',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'road',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'transit',
-      'stylers': [
-      {'visibility': 'off'}
-      ]
-    },
-    {
-      'featureType': 'water',
-      'elementType': 'labels',
-      'stylers':
-      [
-      {'visibility': 'off'}
-      ]
-    }
-    ]
+    styles: mapStyle
   }
   );
   this.markers = [];
   var answerForm = document.getElementById('answer-form');
   answerForm.onsubmit = this.handleAnswer();
-
   var zoomOutButton = document.querySelector('#zoom-out');
   zoomOutButton.onclick = this.zoomOut().bind(this);
-
+  var chartButton = document.getElementById('pie-button');
+  chartButton.onclick = this.displayPie();
 };
 
 MapWrapper.prototype = {
@@ -163,7 +100,7 @@ MapWrapper.prototype = {
           });
           var countryName = country.countryName;
           //^has to be a better way of getting country name?
-          
+
           var resultDiv = document.getElementById('result-div');
           resultDiv.style.display = "block";
           resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b>" + countryName + "</b>.";
@@ -185,7 +122,47 @@ MapWrapper.prototype = {
     console.log("map", this.googleMap);
     this.googleMap.setZoom(2);
     }.bind(this);
+  },
+
+  displayPie: function(){
+    return function(){
+      var pieData = new Map();
+      var url = "http://localhost:3000/markers";
+      var request = new XMLHttpRequest();
+      console.log("about to request");
+      request.open("GET", url);
+      request.onload = function () {
+        console.log("got a response");
+        if (request.status === 200) {
+          var jsonString = request.responseText;
+          var responseObject = JSON.parse(jsonString);
+          console.log("reponse received");
+          responseObject.markersData.forEach(function(countryData){
+            console.log(countryData);
+            if (countryData.playerId){
+              var currentValue = pieData.get(countryData.playerId) || 0;
+              var newValue = currentValue + 1;
+              pieData.set(countryData.playerId, newValue);
+            };
+          });
+          var pieDataArray = [];
+          for (key of pieData.keys()){
+            pieDataArray.push({name: key, y: pieData.get(key)});
+          };
+          PieChart({
+            title: "World Powers",
+            seriesName: "Countries Held",
+            data: pieDataArray
+          });
+        };
+
+      };
+      request.send();
+    };
+
   }
+
+
 
 
 

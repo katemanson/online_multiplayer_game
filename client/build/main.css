@@ -32,7 +32,7 @@ form {
   color: #fff;
   background-color: #333;
   border-bottom: 10px solid #000;
-} 
+}
 
 #banner h1 {
   color: #ffffff;
@@ -47,13 +47,24 @@ form {
   position: relative;
 }
 
-#floating_div { 
+#floating_div {
   position: fixed;
-  bottom: 28px; 
-  right: 50px; 
-  z-index: 99; 
+  bottom: 28px;
+  right: 50px;
+  z-index: 99;
  }
 
+ #chart-div {
+   position: fixed;
+   width: 800px;
+   height: 600px;
+   margin-top: -300px;
+   margin-left: -400px;
+   top: 50%;
+   left: 50%;
+   opacity: 0.95;
+   /*display: none;*/
+ }
 
 button {
   webkit-transition-duration: 0.3s;
