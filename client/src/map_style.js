@@ -1,4 +1,4 @@
-styles: [
+var mapStyle = [
 {
   'featureType': 'all',
   'elementType': 'labels',
@@ -71,3 +71,5 @@ styles: [
   ]
 }
 ]
+
+module.exports = mapStyle;
