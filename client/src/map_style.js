@@ -1,4 +1,11 @@
-var mapStyle = [
+styles: [
+{
+  'featureType': 'all',
+  'elementType': 'labels',
+  'stylers': [
+  {'visibility': 'off'}
+  ]
+},
 {
   'featureType': 'administrative',
   'elementType': 'geometry.fill',
@@ -62,4 +69,5 @@ var mapStyle = [
   [
   {'visibility': 'off'}
   ]
-}]
+}
+]

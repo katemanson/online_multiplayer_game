@@ -90,16 +90,17 @@ Game.prototype = {
               };
           }.bind(this));
 
-          this.sendClientSafeMarkersFromDb(playerGuess.playerId, res);
+          this.sendClientSafeMarkersFromDb(true, playerGuess.playerId, res);
           db.close();
-          // console.log(doc);
+
         }.bind(this)
         );
       }.bind(this));
     }
+    else {
+      this.sendClientSafeMarkersFromDb(false, playerGuess.playerId, res);
+    }
   },
-
-
 
   runDbQuery: function(projection, runMeWhenDone, database, dbCollection){
 
@@ -136,7 +137,7 @@ Game.prototype = {
       );
   },
 
-  sendClientSafeMarkersFromDb: function(clientPlayerId, res){
+  sendClientSafeMarkersFromDb: function(bestGuessBoolean, clientPlayerId, res){
     var markersForClient = this.runDbQuery({
       _id: 0,
       position: 1,
@@ -148,6 +149,7 @@ Game.prototype = {
     },
     function(docs){
       var data = {
+        bestGuess: bestGuessBoolean,
         clientPlayerId: clientPlayerId,
         markersData: docs
       }

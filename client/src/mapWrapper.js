@@ -102,8 +102,13 @@ MapWrapper.prototype = {
           //^has to be a better way of getting country name?
 
           var resultDiv = document.getElementById('result-div');
+          resultDiv.innerHTMl = "";
           resultDiv.style.display = "block";
-          resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b>" + countryName + "</b>.";
+          if (responseObject.bestGuess){
+            resultDiv.innerHTML = "<p>Good guess. </p><p>You've captured <b><br>" + countryName + "</b>.</p>";
+          } else {
+            resultDiv.innerHTML = "<p>Nope, sorry... </p><p>your guess wasn't<br> close enough.</p>";
+          }
           resultDiv.className = "animation-start";
           setTimeout(function(){
             resultDiv.className = "animation-stop";
@@ -119,7 +124,6 @@ MapWrapper.prototype = {
 
   zoomOut: function(){
     return function(event){
-    console.log("map", this.googleMap);
     this.googleMap.setZoom(2);
     }.bind(this);
   },
