@@ -138,22 +138,33 @@ MapWrapper.prototype = {
           var responseObject = JSON.parse(jsonString);
           console.log("reponse received");
           responseObject.markersData.forEach(function(countryData){
-            console.log(countryData);
+            // console.log(countryData);
             if (countryData.playerId){
-              var currentValue = pieData.get(countryData.playerId) || 0;
+              if (pieData.get(countryData.playerId) === undefined){
+                currentValue = 0;
+              } else {
+                currentValue = pieData.get(countryData.playerId).y;
+              };
               var newValue = currentValue + 1;
-              pieData.set(countryData.playerId, newValue);
+              console.log(currentValue, newValue);
+              var sliceData = {y: newValue, color: countryData.color};
+              // console.log("slice", sliceData);
+              pieData.set(countryData.playerId, sliceData );
             };
           });
+
           var pieDataArray = [];
           for (key of pieData.keys()){
-            pieDataArray.push({name: key, y: pieData.get(key)});
+            pieDataArray.push({name: key, y: pieData.get(key).y, color: ("#" + pieData.get(key).color)});
           };
+          console.log(pieDataArray);
           PieChart({
             title: "World Powers",
             seriesName: "Countries Held",
             data: pieDataArray
           });
+          var pieChartDiv = document.getElementById('chart-div');
+          pieChartDiv.style.display = "block";
         };
 
       };
