@@ -31,6 +31,8 @@ MapWrapper.prototype = {
     alpha2CodeInput.value = returnValue;
     var answerBox = document.getElementById('answer-box');
     answerBox.style.display = "block";
+    var answerInput = document.getElementById('answer-input');
+    answerInput.value = "";
     if (playerId) {
       document.getElementById('username-div').style.display = "none";
     }
