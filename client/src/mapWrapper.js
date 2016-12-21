@@ -124,7 +124,7 @@ MapWrapper.prototype = {
 
   zoomOut: function(){
     return function(event){
-    this.googleMap.setZoom(2);
+    this.googleMap.setZoom(3);
     }.bind(this);
   },
 
@@ -163,6 +163,9 @@ MapWrapper.prototype = {
           });
           var pieChartDiv = document.getElementById('chart-div');
           pieChartDiv.style.display = "block";
+          pieChartDiv.addEventListener('click', function(){
+            this.style.display = "none";
+          });
         };
 
       };

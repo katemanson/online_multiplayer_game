@@ -66,6 +66,21 @@ form {
    display: none;
  }
 
+/* #close {
+  float: right;
+  display: block;
+  padding: 2px;
+  background-color: #2e5cb8
+ }
+
+ #close:hover {
+  float: right;
+  display: inline-block;
+  padding: 2px;
+  background-color: #2e5cb8;
+  color: #ffffff;
+ }
+*/
 button {
   webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
