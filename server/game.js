@@ -72,6 +72,7 @@ Game.prototype = {
             playerId: playerGuess.playerId,
             labelStatus: "<p>Held by <b>" + playerGuess.playerName + "</b></p>",
             color: player.color,
+            playerName: playerGuess.playerName,
             bestGuess: playerGuess.population
           }
         },
@@ -145,6 +146,7 @@ Game.prototype = {
       alpha2Code: 1,
       playerId: 1,
       labelStatus: 1,
+      playerName: 1,
       color: 1
     },
     function(docs){
