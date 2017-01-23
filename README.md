@@ -25,7 +25,7 @@ In terms of functionality, this meant that:
 
 ##Tech
 
-* Vanilla JavaScript
+* vanilla JavaScript
 * Node.js
 * Express (web framework)
 * MongoDB (NoSQL database)
